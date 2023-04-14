@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="liquibase-docs" id="create_conversions_table">
+        <createSequence sequenceName="conversions_id_seq"/>
+
+        <createTable tableName="conversions">
+            <column name="id" type="INTEGER">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="request_id" type="TEXT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="symbol" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="result" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValue="NOW()"/>
+            <column name="updated_at" type="TIMESTAMP" defaultValue="NOW()"/>
+
+        </createTable>
+
+        <addDefaultValue tableName="conversions" columnName="id" defaultValueSequenceNext="conversions_id_seq"/>
+
+        <createIndex tableName="conversions" indexName="symbol_index">
+            <column name="symbol"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
+
+

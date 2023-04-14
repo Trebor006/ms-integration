@@ -10,17 +10,14 @@ create sequence conversions_id_seq;
 
 CREATE TABLE conversions
 (
-    id         SERIAL PRIMARY KEY,
+    id         INT PRIMARY KEY DEFAULT nextval('conversions_id_seq'),
     request_id TEXT             NOT NULL UNIQUE,
     symbol     TEXT             NOT NULL,
-    amount     INTEGER          NOT NULL,
+    amount     DOUBLE PRECISION NOT NULL,
     currency   TEXT             NOT NULL,
     result     DOUBLE PRECISION NOT NULL,
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
+    created_at TIMESTAMP       DEFAULT NOW(),
+    updated_at TIMESTAMP       DEFAULT NOW()
 );
-
-ALTER TABLE conversions
-    ALTER COLUMN id SET DEFAULT nextval('conversions_id_seq');
 
 CREATE INDEX symbol_index ON conversions (symbol);
