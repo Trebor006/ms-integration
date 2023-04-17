@@ -1,7 +1,6 @@
 package com.java.test.msintegration.services.repository;
 
 import com.java.test.msintegration.entities.ConversionEntity;
-import java.util.List;
 import java.util.Optional;
 
 public interface ConversionRepositoryServiceInterface {

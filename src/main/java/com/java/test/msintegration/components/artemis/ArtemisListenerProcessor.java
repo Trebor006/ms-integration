@@ -1,6 +1,7 @@
 package com.java.test.msintegration.components.artemis;
 
 import com.google.gson.Gson;
+import com.java.test.msintegration.components.messages.MessageServiceInterface;
 import com.java.test.msintegration.dto.QueueMessage;
 import com.java.test.msintegration.services.processor.ProcessorLocatorServiceInterface;
 import lombok.RequiredArgsConstructor;
@@ -13,10 +14,11 @@ import org.springframework.stereotype.Service;
 public class ArtemisListenerProcessor implements ListenerProcessorInterface {
 
   private final ProcessorLocatorServiceInterface processorService;
+  private final MessageServiceInterface messageService;
 
   @Override
   public void process(String content) {
-    log.info("starting to process...");
+    log.info(messageService.getMessage("process.starting"));
     var gson = new Gson();
     var queueMessage = gson.fromJson(content, QueueMessage.class);
     var processor = processorService.getProcessor(queueMessage.getType());

@@ -24,7 +24,7 @@ public class ConversionResponseService implements ConversionResponseServiceInter
   @Override
   @Async
   public void generateResponse(ConversionEntity conversion) {
-    log.info("generating response");
+    log.info(messageService.getMessage("process.getting.response"));
     var conversionResponseDto = conversionMapperService.mapToResult(conversion);
     var message = QueueMessage.builder()
             .type(MessageType.CONVERSION_RESPONSE)
