@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <changeSet author="Robert Cabrera" id="create_conversions_table">
+        <createTable tableName="conversions">
+            <column name="id" type="INTEGER">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="request_id" type="TEXT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="symbol" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="result" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValue="NOW()"/>
+            <column name="updated_at" type="TIMESTAMP" defaultValue="NOW()"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="conversions"/>
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>
+
+

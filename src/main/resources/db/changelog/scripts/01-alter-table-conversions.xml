@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="Robert Cabrera" id="update_conversions_table">
+        <createSequence sequenceName="conversions_id_seq"/>
+        <addDefaultValue tableName="conversions" columnName="id" defaultValueSequenceNext="conversions_id_seq"/>
+        <createIndex tableName="conversions" indexName="symbol_index">
+            <column name="symbol"/>
+        </createIndex>
+
+        <rollback>
+            <dropIndex tableName="conversions" indexName="symbol_index"/>
+            <dropDefaultValue tableName="conversions" columnName="id"/>
+            <dropSequence sequenceName="conversions_id_seq"/>
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>
+
+
